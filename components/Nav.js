@@ -28,9 +28,9 @@ const Nav = () => {
           height={30}
           className='object-contain'
         />
-        <p className='logo_text'>Promptopia</p>
+        <p className='logo_text'>My Ticket</p>
       </Link>
-      {/* <Link href='/create-prompt' className='black_btn'>
+      {/* <Link href='/my-events' className='black_btn'>
               Create Post
       </Link> */}
 
@@ -38,18 +38,25 @@ const Nav = () => {
       <div className='sm:flex hidden'>
         {session?.user ? (
           <div className='flex gap-3 md:gap-5'>
-            <Link href='/create-prompt' className='black_btn'>
-              Create Post
+            <Link href='/my-events' className='black_btn'>
+              My Events 
             </Link>
             <Link href='/buy-product' className='black_btn'>
-              Buy Product
+              Available Event Tickets
             </Link>
+            <Link href='/buy-product' className='black_btn'>
+              Become a Partner
+            </Link>
+            <Link href='/my-tickets' className='black_btn'>
+              My Tickets
+            </Link>
+
 
             <button type='button' onClick={signOut} className='outline_btn'>
               Sign Out
             </button>
 
-            <Link href='/profile'>
+            <Link href='/my-tickets'>
               <Image
                 src={session?.user.image}
                 width={37}
@@ -61,6 +68,12 @@ const Nav = () => {
           </div>
         ) : (
           <>
+            <Link href='/buy-product' className='black_btn'>
+              Available Event Tickets
+            </Link>
+            <Link href='/buy-product' className='black_btn'>
+              Become a Partner
+            </Link>
             {providers &&
               Object.values(providers).map((provider) => (
                 <button
@@ -94,14 +107,14 @@ const Nav = () => {
             {toggleDropdown && (
               <div className='dropdown'>
                 <Link
-                  href='/profile'
+                  href='/my-tickets'
                   className='dropdown_link'
                   onClick={() => setToggleDropdown(false)}
                 >
-                  My Profile
+                  My Tickets
                 </Link>
                 <Link
-                  href='/create-prompt'
+                  href='/my-events'
                   className='dropdown_link'
                   onClick={() => setToggleDropdown(false)}
                 >

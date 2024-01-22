@@ -1,11 +1,13 @@
 // components/ProductList.js
 
 import React from 'react';
+import Link from 'next/link';
 
 const ProductList = ({ products }) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {products.map((product) => (
+        <Link href={product.URL} key={product.id}>
         <div key={product.id} className="p-4 border border-gray-300 rounded-lg">
           <img
             src={product.image}
@@ -18,6 +20,7 @@ const ProductList = ({ products }) => {
             Add to Cart
           </button>
         </div>
+        </Link>
       ))}
     </div>
   );
