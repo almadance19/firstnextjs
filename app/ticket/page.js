@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import FormDataDisplay from "@components/dataTicket";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { useEffect, useState } from "react";
+
 /*
 Save TICKET FIRST 
 ASK IF USER WANTS TO SIGN IN TO SAVE TICKET ON THE SYSTEM AND GET NOTIFICATIONS
@@ -134,25 +135,25 @@ const ExternalApiPage = () => {
  
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 m-4 py-4">
       <Head>
         <title>Next.js Tailwind External API</title>
       </Head>
       {type === "org" && session?.user && (
-        <div>
+        <div >
           <h1 className="text-2xl font-bold mb-4">Organiser View</h1>
           <p className="mb-4">
            Click the button below to see and print your Ticket
           </p>
           <button
             onClick={handleSendToApi}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            className="btn btn-primary m-4 text-white px-4 py-2 rounded hover:bg-blue-600"
           > 
             Show & Print Ticket
           </button> 
           <button
             onClick={handleSendToApi}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            className="btn btn-primary m-4 text-white px-4 py-2 rounded hover:bg-blue-600"
           > 
             Edit Ticket
           </button> 

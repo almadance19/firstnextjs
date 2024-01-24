@@ -1,16 +1,29 @@
-import React from 'react';
-import html2pdf from 'html2pdf.js';
-import QRCode from 'qrcode.react';
 
-const FormDataDisplay = ({ data }) => {
+import React from 'react';
+import QRCode from 'qrcode.react';
+import { useEffect } from "react";
+
+
+export default function FormDataDisplay({data}) {
   // Format the date string
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString('en-US', options);
   };
 
+  // Generate the PDF when component mounts
+  useEffect(() => {
+    // Check if running in the browser environment
+    if (typeof window !== 'undefined') {
+      const html2pdf = require('html2pdf.js'); // Dynamic import to avoid SSR issues
+      generatePdf(html2pdf);
+    }
+
+  }, []);
+ 
+
   // Generate the PDF
-  const generatePdf = () => {
+  const generatePdf = (html2pdf) => {
     const element = document.getElementById('pdfContent');
 
     // Set the visibility and position properties
@@ -121,5 +134,3 @@ const FormDataDisplay = ({ data }) => {
     </>
   );
 };
-
-export default FormDataDisplay;
