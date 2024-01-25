@@ -12,7 +12,7 @@ export const metadata = {
 };
 
 const RootLayout = ({ children }) => (
-  <html lang='en'>
+  <html lang='en' data-theme="light">
     <body className='	primary-content'>
       <Provider>
         <Header />

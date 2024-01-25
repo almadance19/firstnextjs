@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import FormDataDisplay from "@components/dataTicket";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { useEffect, useState } from "react";
+import PrintButton from "@components/PrintPage";
 
 /*
 Save TICKET FIRST 
@@ -208,7 +209,8 @@ const ExternalApiPage = () => {
         </div>  
       )}
       {apiResponse && (
-            <div>
+            <div className="py-4">
+              <PrintButton />
               <FormDataDisplay data={apiResponse} />
             </div>
       )}
