@@ -88,6 +88,11 @@
   }
 }
 
+@layer utilities {
+  .padding {
+    @apply sm:px-16 px-8 sm:py-24 py-12;
+  }
+}   
 
 @supports (-webkit-appearance:none) and (not (overflow:-webkit-marquee)) {
   @media (prefers-color-scheme: dark) {
@@ -205,3 +210,5 @@
 .flex-between {
   @apply flex justify-between items-center;
 }
+
+

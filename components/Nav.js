@@ -39,22 +39,23 @@ const Nav = () => {
       <div className='sm:flex hidden'>
         {session?.user ? (
           <div className='flex gap-3 md:gap-5'>
-            <Link href='/my-events' className='black_btn'>
+            <Link href='/my-events' className='leading-normal text-lg pr-4'>
               My Events 
             </Link>
-            <Link href='/buy-product' className='black_btn'>
+            <Link href='/buy-product' className='leading-normal text-lg pr-4'>
               Available Event Tickets
             </Link>
-            <Link href='/my-tickets' className='black_btn'>
+            <Link href='/my-tickets' className='leading-normal text-lg pr-4'>
               My Tickets
             </Link>
-            <Link href='/event-registration' className='black_btn'>
+            <Link href='/event-registration' className='leading-normal text-lg pr-4'>
               Event Registration
+
             </Link>
 
 
 
-            <button type='button' onClick={signOut} className='outline_btn'>
+            <button type='button' onClick={signOut} className='outline_btn text-lg pr-2'>
               Sign Out
             </button>
 
@@ -70,10 +71,10 @@ const Nav = () => {
           </div>
         ) : (
           <>
-            <Link href='/buy-product' className='black_btn'>
+            <Link href='/buy-product' className='leading-normal text-lg pr-4'>
               Available Event Tickets
             </Link>
-            <Link href='/buy-product' className='black_btn'>
+            <Link href='/buy-product' className='leading-normal text-lg pr-4'>
               Become a Partner
             </Link>
             {providers &&
@@ -84,7 +85,7 @@ const Nav = () => {
                   onClick={() => {
                     signIn(provider.id);
                   }}
-                  className='black_btn'
+                  className='black_btn text-lg'
                 >
                   Sign in
                 </button>
@@ -166,7 +167,7 @@ const Nav = () => {
                   onClick={() => {
                     signIn(provider.id);
                   }}
-                  className='black_btn'
+                  className='black_btn text-lg'
                 >
                   Sign in
                 </button>

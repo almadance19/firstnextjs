@@ -17,8 +17,9 @@ const RootLayout = ({ children }) => (
       <Provider>
         <Header />
         <main  className='app mx-auto pt-10 	primary-content '>
-
-          {children}
+        <section className='padding'>
+        {children}
+        </section>
         </main>
         <Footer />
       </Provider>

@@ -5,7 +5,9 @@ import Image from "next/image";
 
 const Header = () => {    
     return (
-        <header data-theme="business" className="bg-primary text-primary-content  py-4 shadow">
+        <>
+        
+        <header data-theme="business" className="bg-primary text-primary-content  p-2 shadow ">
         {/* <div className="container max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         {/* <h1 className="text-3xl font-bold leading-tight">Box Office</h1> */}
         {/* <div className="flex justify-between">
@@ -17,8 +19,9 @@ const Header = () => {
 
         <Nav />	
 
+        </header> 
+        </>
 
-        </header>
     );
 }
 
