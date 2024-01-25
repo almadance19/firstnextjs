@@ -16,7 +16,7 @@ const RootLayout = ({ children }) => (
     <body className='	primary-content'>
       <Provider>
         <Header />
-        <main  className='app mx-auto pt-10 	primary-content '>
+        <main  className='.app2  pt-10 	primary-content '>
         <section className='padding'>
         {children}
         </section>
