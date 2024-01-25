@@ -45,12 +45,13 @@ const Nav = () => {
             <Link href='/buy-product' className='black_btn'>
               Available Event Tickets
             </Link>
-            <Link href='/buy-product' className='black_btn'>
-              Become a Partner
-            </Link>
             <Link href='/my-tickets' className='black_btn'>
               My Tickets
             </Link>
+            <Link href='/event-registration' className='black_btn'>
+              Event Registration
+            </Link>
+
 
 
             <button type='button' onClick={signOut} className='outline_btn'>
@@ -119,7 +120,7 @@ const Nav = () => {
                   className='dropdown_link'
                   onClick={() => setToggleDropdown(false)}
                 >
-                  Create Prompt
+                  My Events
                 </Link>
                 <Link
                   href='/buy-product'
@@ -127,6 +128,20 @@ const Nav = () => {
                   onClick={() => setToggleDropdown(false)}
                 >
                   Buy Product
+                </Link>
+                <Link
+                  href='/event-registration'
+                  className='dropdown_link'
+                  onClick={() => setToggleDropdown(false)}
+                >
+                  Event Registration
+                </Link>
+                <Link
+                  href='/contact'
+                  className='dropdown_link'
+                  onClick={() => setToggleDropdown(false)}
+                >
+                  Contact
                 </Link>
                 <button
                   type='button'
