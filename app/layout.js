@@ -12,11 +12,11 @@ export const metadata = {
 };
 
 const RootLayout = ({ children }) => (
-  <html lang='en' data-theme="light">
+  <html lang='en' >
     <body className='	primary-content'>
       <Provider>
         <Header />
-        <main data-theme="light" className='app mx-auto pt-10 	primary-content '>
+        <main  className='app mx-auto pt-10 	primary-content '>
 
           {children}
         </main>
