@@ -26,74 +26,74 @@ export default function FormDataDisplay({data}) {
   <h1 className="text-2xl font-bold mb-4">{data.EventExists.eventName}</h1>
   <form className="bg-white border border-gray-300 p-4 rounded-md">
     <div className="mb-4">
-      <label className="block text-gray-600 mb-2">Payment Date</label>
+      <label className="block text-gray-600 mb-2 font-bold">Payment Date</label>
       <input
         type="text"
         value={formatDate(data.CheckoutData.created_at)}
-        className="form-input w-full border-b-2 border-gray-400 cursor-not-allowed"
+        className="form-input w-full   cursor-not-allowed"
         readOnly
       />
     </div>
     <div className="mb-4">
-      <label className="block text-gray-600 mb-2">Email ID</label>
+      <label className="block text-gray-600 mb-2 font-bold">Email ID</label>
       <input
         type="text"
         value={data.CheckoutData.email}
-        className="form-input w-full border-b-2 border-gray-400 cursor-not-allowed"
+        className="form-input w-full   cursor-not-allowed"
         readOnly
       />
     </div>
     <div className="mb-4">
-      <label className="block text-gray-600 mb-2">Ticket Name</label>
+      <label className="block text-gray-600 mb-2 font-bold">Ticket Name</label>
       <input
         type="text"
         value={data.CheckoutData.name_ticket}
-        className="form-input w-full border-b-2 border-gray-400 cursor-not-allowed"
+        className="form-input w-full   cursor-not-allowed"
         readOnly
       />
     </div>
     <div className="mb-4">
-          <label className="block text-gray-600 mb-2">Payer Name</label>
+          <label className="block text-gray-600 mb-2 font-bold">Payer Name</label>
           <input
             type="text"
             value={data.CheckoutData.name_payment}
-            className="form-input w-full border-b-2 border-gray-400 cursor-not-allowed"
+            className="form-input w-full   cursor-not-allowed"
             readOnly
           />
           </div>
           <div className="mb-4">
-          <label className="block text-gray-600 mb-2">Ticket Type</label>
+          <label className="block text-gray-600 mb-2 font-bold">Ticket Type</label>
           <input
             type="text"
             value={data.CheckoutData.ticket_type}
-            className="form-input w-full border-b-2 border-gray-400 cursor-not-allowed"
+            className="form-input w-full   cursor-not-allowed"
             readOnly
           />
           </div> 
           <div className="mb-4">
-          <label className="block text-gray-600 mb-2">Ticket Nr</label>
+          <label className="block text-gray-600 mb-2 font-bold">Ticket Nr</label>
           <input
             type="text"
             value={data.CheckoutData.ticket_nr}
-            className="form-input w-full border-b-2 border-gray-400 cursor-not-allowed"
+            className="form-input w-full   cursor-not-allowed"
             readOnly
           />
           </div> 
           <div className="mb-4">
-          <label className="block text-gray-600 mb-2">Payment Amount</label>
+          <label className="block text-gray-600 mb-2 font-bold">Payment Amount</label>
           <input
             type="text"
             value={data.CheckoutData.pre_total+" EUR"}
-            className="form-input w-full border-b-2 border-gray-400 cursor-not-allowed"
+            className="form-input w-full   cursor-not-allowed"
             readOnly
           />
         </div>
         <div className="mb-4">
-        <label className="block text-gray-600 mb-2">Ticket ID</label>
+        <label className="block text-gray-600 mb-2 font-bold">Ticket ID</label>
           <input
             type="text"
             value={data.CheckoutData.ticket_id}
-            className="form-input w-full border-b-2 border-gray-400 cursor-not-allowed"
+            className="form-input w-full   cursor-not-allowed"
             readOnly
           />
           </div>
