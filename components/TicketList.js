@@ -3,18 +3,20 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
-const TicketList = ({ tickets }) => {
+const TicketList = ({ tickets, role }) => {
+  const { data: session } = useSession();
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {tickets.map((ticket) => (
-        <Link href={`/ticket?event=${ticket.eventURL}&id=${ticket.ticket_id}&type=org`} key={ticket._id}>
+        <Link href={`/ticket?event=${ticket.eventURL}&id=${ticket.ticket_id}&type=${role}`} key={ticket._id}>
         <div className=''>
         <div className='flex justify-between items-start gap-5'>
         <div key={ticket._id} className="bg-white p-4 rounded-md shadow-md">
         <div className='flex-1 flex justify-start items-center gap-3 cursor-pointer'>
           <Image
-            src="https://unpkg.com/@icon/icofont/icons/ticket.svg"
+            src={session?.user.image}
             alt='user_image'
             width={25}
             height={25}

@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { useState } from 'react';
 import CsvTable from "@components/TicketTable";
 import Link from "next/link";
+import TicketList from "@components/TicketList";
 
 /// SAVE THE TICKET ALREADY AT CREATION WITHOUT HAVING TO GO TO WEB PAGE AND RISK MESSING WITH API
 // HIDE ORGANISER ID FROM ALL CLIENT TICKETS
@@ -108,7 +109,7 @@ const handleGetCardData = async () => {
         >
           See all Sales
         </button>
-        <Link href={`/my-tickets`} >
+
         <button
         id="send-to-api"
         name="send-to-api"
@@ -117,7 +118,7 @@ const handleGetCardData = async () => {
       >
         Search and Edit Individual Tickets
       </button>
-        </Link>
+
         </div>
       )}
         {allCSVData ? (
@@ -126,7 +127,7 @@ const handleGetCardData = async () => {
             <p className="text-gray-500"></p>
         )}
         {allCardData ? (
-            <CsvTable data={allCardData} />
+            <TicketList tickets={allCardData} role={"org"}  />
         ) : (
             <p className="text-gray-500"></p>
         )}

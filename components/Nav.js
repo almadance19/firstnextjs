@@ -48,10 +48,9 @@ const Nav = () => {
             <Link href='/my-tickets' className='leading-normal text-lg pr-4'>
               My Tickets
             </Link>
-            <Link href='/event-registration' className='leading-normal text-lg pr-4'>
+            {/* <Link href='/event-registration' className='leading-normal text-lg pr-4'>
               Event Registration
-
-            </Link>
+            </Link> */}
 
 
 
@@ -130,13 +129,13 @@ const Nav = () => {
                 >
                   Buy Product
                 </Link>
-                <Link
+                {/* <Link
                   href='/event-registration'
                   className='dropdown_link'
                   onClick={() => setToggleDropdown(false)}
                 >
                   Event Registration
-                </Link>
+                </Link> */}
                 <Link
                   href='/contact'
                   className='dropdown_link'

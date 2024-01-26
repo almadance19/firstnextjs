@@ -20,9 +20,11 @@ const MyProfile = () => {
 
   useEffect(() => {
 
+    console.log(session?.user.email);
+
 
     const fetchEvents = async () => {
-      const response = await fetch(`/api/users/${session?.user.id}/tickets`);
+      const response = await fetch(`/api/users/${session?.user.email}/tickets`);
       const CheckoutData = await response.json();
       console.log(CheckoutData);
        setMyEvebts(CheckoutData);
@@ -42,11 +44,12 @@ const MyProfile = () => {
       <h1 className='head_text text-left'>
         <span className='blue_gradient'>MY TICKETS</span>
       </h1>
+      <span className='desc text-left'>****Only for Users. Here you will see your saved tickets linked to your email and profile.</span>
       <p className='desc text-left'>{session?.user.email}</p>
 
       <div className='mt-10 '>
 
-          <TicketList tickets={myEvents} />
+          <TicketList tickets={myEvents} role="buyer" />
 
       </div>
     </section>

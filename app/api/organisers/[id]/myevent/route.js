@@ -6,7 +6,10 @@ export const GET = async (request, { params }) => {
     try {
         await connectToDB()
 
-        const prompts = await Event.find({ creator: params.id }).populate("creator")
+        const prompts = await Event.find({ creator: params.id }).select({
+            creator: 0, // Exclude
+            });
+
 
         return new Response(JSON.stringify(prompts), { status: 200 })
     } catch (error) {

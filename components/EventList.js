@@ -6,9 +6,10 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-//import { useRouter } from 'next/router';
+import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const EventList = ({ events }) => {
+  const { data: session } = useSession();
 //const router = useRouter();
 
   const handleEdit = (eventId) => {
@@ -21,21 +22,17 @@ const EventList = ({ events }) => {
     console.log(`Delete event with ID: ${eventId}`);
   };
 
-  const handleMoveToPage = (url) => {
-    // Navigate to another page URL
-    router.push(url);
-  };
+
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {events.map((event) => (
-        <Link href={`/my-events/ticketsales?eventurl=${event.eventURL}`} key={event._id}>
-        <div className=''>
-        <div className='flex justify-between items-start gap-5'>
-        <div key={event._id} className="bg-white p-4 rounded-md shadow-md">
+        // <Link href={`/my-events/ticketsales?eventurl=${event.eventURL}`} key={event._id}>
+        <div key={event._id} className='flex justify-between items-start gap-5'>
+        <div className="bg-white p-4 rounded-md shadow-md">
         <div className='flex-1 flex justify-start items-center gap-3 cursor-pointer'>
           <Image
-            src="https://unpkg.com/@icon/icofont/icons/book.svg"
+            src={session?.user.image}
             alt='user_image'
             width={25}
             height={25}
@@ -55,8 +52,6 @@ const EventList = ({ events }) => {
           <p className="text-gray-600">{event.eventEmail}</p>
           <p className="text-gray-600">{event.eventAdress}</p>
           <div className="mt-4 flex items-center justify-between">
-            <p className="text-sm text-gray-500">More</p>
-            <span className="text-sm text-indigo-600">{event.eventName}</span>
           </div>
           <div className="mt-4 flex items-center justify-between">
               {/* Button to edit */}
@@ -76,18 +71,17 @@ const EventList = ({ events }) => {
               </button>
 
               {/* Button to move to another page URL */}
+              <Link href={`/my-events/ticketsales?eventurl=${event.eventURL}`}> 
               <button
-                onClick={() => handleMoveToPage(`/ticketsales?event=${event.eventURL}&id=${event.creator._id}`)}
                 className="text-sm text-indigo-600 cursor-pointer"
               >
                 See Ticket Sales
               </button>
+              </Link>
             </div>
         </div>
-        
         </div>
-        </div>
-        </Link>
+
       ))}
     </div>
   );

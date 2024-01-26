@@ -7,7 +7,7 @@ const PrintButton = () => {
 
   return (
     <div>
-      <button className='btn btn-active btn-secondary' onClick={handlePrint}>Print Page</button>
+      <button className='btn btn-active btn-secondary' onClick={handlePrint}>Print Ticket</button>
       {/* Your other page content */}
     </div>
   );
