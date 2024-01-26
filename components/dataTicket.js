@@ -23,8 +23,12 @@ export default function FormDataDisplay({data}) {
   return (
     <>
   <div id="printableContent" className="container mx-auto p-4">
-  <h1 className="text-2xl font-bold mb-4">{data.EventExists.eventName}</h1>
   <form className="bg-white border border-gray-300 p-4 rounded-md">
+  <h1 className="text-3xl font-bold mb-4">{data.EventExists.eventName}</h1>
+  <h2 className="text-2xl font-bold mb-4">{data.EventExists.eventDate}</h2>
+  <p className=" font-bold mb-4">{data.EventExists.eventAdress}</p>
+  <p className=" font-bold mb-4">{data.EventExists.eventDescription}</p>
+  <br />
     <div className="mb-4">
       <label className="block text-gray-600 mb-2 font-bold">Payment Date</label>
       <input
@@ -97,10 +101,11 @@ export default function FormDataDisplay({data}) {
             readOnly
           />
           </div>
-  </form>
-  <div className="mt-4">
-    <QRCode value="https://example.com" size={200} />
+          <br />
+          <div className="mb-4 justify-center items-center">
+    <QRCode value={`/ticket?event=${data.CheckoutData.eventURL}&id=${data.CheckoutData.ticket_id}&type=org`} size={200} />
   </div>
+  </form>
   </div>
     <PrintButton />
     </>
