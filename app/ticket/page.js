@@ -6,6 +6,7 @@ import FormDataDisplay from "@components/dataTicket";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { useEffect, useState } from "react";
 import PrintButton from "@components/PrintPage";
+import EditFormDataDisplay from "@components/editTicket";
 
 /*
 Save TICKET FIRST 
@@ -25,6 +26,8 @@ const ExternalApiPage = () => {
   const [providers, setProviders] = useState(null);
 
   const [apiResponse, setApiResponse] = useState(null);
+  const [apiResponse2, setApiResponse2] = useState(null);
+
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const event = searchParams.get("event");
@@ -97,6 +100,27 @@ const ExternalApiPage = () => {
     }
   };
   
+  const handleEdit = async () => {
+    try {
+      if (id && event) {
+        const body = {
+          eventURL: event,
+          id: id,
+          type: type,
+          creator: session?.user.id,
+        };
+        // handleSendToApi();
+
+        setApiResponse2("Edit");
+      }
+    }
+    catch (error) {
+      console.error('Error sending data to API:', error);
+    }
+  }
+
+      
+
 
  
 
@@ -118,7 +142,7 @@ const ExternalApiPage = () => {
             Print Ticket
           </button> 
           <button
-            onClick={handleSendToApi}
+            onClick={handleEdit}
             className="btn btn-info m-4 text-white px-4 py-2 rounded hover:bg-blue-600"
           > 
             Edit Ticket
@@ -185,9 +209,13 @@ const ExternalApiPage = () => {
               <FormDataDisplay data={apiResponse} />
             </div>
       )}
+      {apiResponse2 && (
+            <div className="py-4">
+              <EditFormDataDisplay data={apiResponse} />
+            </div>
+      )}  
+      
         <div>
-
-        
         </div>
     </div>
 

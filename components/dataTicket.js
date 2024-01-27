@@ -29,78 +29,35 @@ export default function FormDataDisplay({data}) {
   <p className=" font-bold mb-4">{data.EventExists.eventAdress}</p>
   <p className=" font-bold mb-4">{data.EventExists.eventDescription}</p>
   <br />
-    <div className="mb-4">
-      <label className="block text-gray-600 mb-2 font-bold">Payment Date</label>
-      <input
-        type="text"
-        value={formatDate(data.CheckoutData.created_at)}
-        className="form-input w-full   cursor-not-allowed"
-        readOnly
-      />
-    </div>
-    <div className="mb-4">
-      <label className="block text-gray-600 mb-2 font-bold">Email ID</label>
-      <input
-        type="text"
-        value={data.CheckoutData.email}
-        className="form-input w-full   cursor-not-allowed"
-        readOnly
-      />
-    </div>
-    <div className="mb-4">
-      <label className="block text-gray-600 mb-2 font-bold">Ticket Name</label>
-      <input
-        type="text"
-        value={data.CheckoutData.name_ticket}
-        className="form-input w-full   cursor-not-allowed"
-        readOnly
-      />
-    </div>
-    <div className="mb-4">
-          <label className="block text-gray-600 mb-2 font-bold">Payer Name</label>
-          <input
-            type="text"
-            value={data.CheckoutData.name_payment}
-            className="form-input w-full   cursor-not-allowed"
-            readOnly
-          />
-          </div>
-          <div className="mb-4">
-          <label className="block text-gray-600 mb-2 font-bold">Ticket Type</label>
-          <input
-            type="text"
-            value={data.CheckoutData.ticket_type}
-            className="form-input w-full   cursor-not-allowed"
-            readOnly
-          />
-          </div> 
-          <div className="mb-4">
-          <label className="block text-gray-600 mb-2 font-bold">Ticket Nr</label>
-          <input
-            type="text"
-            value={data.CheckoutData.ticket_nr}
-            className="form-input w-full   cursor-not-allowed"
-            readOnly
-          />
-          </div> 
-          <div className="mb-4">
-          <label className="block text-gray-600 mb-2 font-bold">Payment Amount</label>
-          <input
-            type="text"
-            value={data.CheckoutData.pre_total+" EUR"}
-            className="form-input w-full   cursor-not-allowed"
-            readOnly
-          />
-        </div>
-        <div className="mb-4">
-        <label className="block text-gray-600 mb-2 font-bold">Ticket ID</label>
-          <input
-            type="text"
-            value={data.CheckoutData.ticket_id}
-            className="form-input w-full   cursor-not-allowed"
-            readOnly
-          />
-          </div>
+  <div className="mb-4">
+  <label className="block text-gray-600 mb-2 font-bold">Payment Date</label>
+  <p className="text-gray-800">{formatDate(data.CheckoutData.created_at)}</p>
+</div>
+<div className="mb-4">
+  <label className="block text-gray-600 mb-2 font-bold">Email ID</label>
+  <p className="text-gray-800">{data.CheckoutData.email}</p>
+</div>
+<div className="mb-4">
+  <label className="block text-gray-600 mb-2 font-bold">Ticket Name</label>
+  <p className="text-gray-800">{data.CheckoutData.name_ticket}</p>
+</div>
+<div className="mb-4">
+  <label className="block text-gray-600 mb-2 font-bold">Payer Name</label>
+  <p className="text-gray-800">{data.CheckoutData.name_payment}</p>
+</div>
+<div className="mb-4">
+  <label className="block text-gray-600 mb-2 font-bold">Ticket Type</label>
+  <p className="text-gray-800">{data.CheckoutData.ticket_type}</p>
+</div>
+<div className="mb-4">
+  <label className="block text-gray-600 mb-2 font-bold">Payment Amount</label>
+  <p className="text-gray-800">{data.CheckoutData.pre_total} EUR</p>
+</div>
+<div className="mb-4">
+  <label className="block text-gray-600 mb-2 font-bold">Ticket Nr</label>
+  <p className="text-gray-800">{data.CheckoutData.ticket_nr}</p>
+</div>
+
           <br />
           <div className="mb-4 justify-center items-center">
     <QRCode value={`https://firstnextjs-wine.vercel.app/ticket?event=${data.CheckoutData.eventURL}&id=${data.CheckoutData.ticket_id}&type=org`} size={200} />
