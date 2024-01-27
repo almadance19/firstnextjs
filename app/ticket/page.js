@@ -27,6 +27,8 @@ const ExternalApiPage = () => {
 
   const [apiResponse, setApiResponse] = useState(null);
   const [apiResponse2, setApiResponse2] = useState(null);
+  const [editButton, setEditButton] = useState(null);
+
 
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
@@ -69,7 +71,12 @@ const ExternalApiPage = () => {
             }
              
             const data2 = await response2.json();
-            console.log('STRIPE API REP:', data2);
+     
+
+            if (session?.user.id == data2.CheckoutData.eventOrganiserId ) {
+              console.log('ORGANISER TICKET');
+              setApiResponse2("Edit");
+            }
 
             return data2;
           } catch (error) {
@@ -110,8 +117,7 @@ const ExternalApiPage = () => {
           creator: session?.user.id,
         };
         // handleSendToApi();
-
-        setApiResponse2("Edit");
+        setEditButton("Edit");
       }
     }
     catch (error) {
@@ -129,7 +135,7 @@ const ExternalApiPage = () => {
       <Head>
         <title>Next.js Tailwind External API</title>
       </Head>
-      {type === "org" && session?.user && (
+      {type === "org" && session?.user &&   (
         <div >
           <h1 className="text-2xl font-bold mb-4">Organiser Ticket Management</h1>
           <p className="mb-4">
@@ -139,9 +145,11 @@ const ExternalApiPage = () => {
             onClick={handleSendToApi}
             className="btn btn-primary m-4 text-white px-4 py-2 rounded hover:bg-blue-600"
           > 
-            Print Ticket
+            Open Ticket
           </button> 
-          <button
+          {apiResponse2 && (
+            <>
+                        <button
             onClick={handleEdit}
             className="btn btn-info m-4 text-white px-4 py-2 rounded hover:bg-blue-600"
           > 
@@ -153,6 +161,8 @@ const ExternalApiPage = () => {
           > 
             Check In
           </button> 
+            </>
+          )}
         </div>
       )}
       {type === "buyer" && !session?.user   && (
@@ -165,7 +175,7 @@ const ExternalApiPage = () => {
             onClick={handleSendToApi}
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
           > 
-            Print Ticket
+            Open Ticket
           </button>  
           <p className="mb-4">
             Do you want to save your Ticket to be available here online?
@@ -199,21 +209,22 @@ const ExternalApiPage = () => {
             onClick={handleSendToApi}
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
           > 
-            Show & Print Ticket
+            Show & Open Ticket
           </button>  
         </div>  
       )}
+      {editButton && (
+            <div className="py-4">
+              <EditFormDataDisplay data={apiResponse} />
+            </div>
+      )} 
       {apiResponse && (
             <div className="py-4">
               <PrintButton />
               <FormDataDisplay data={apiResponse} />
             </div>
       )}
-      {apiResponse2 && (
-            <div className="py-4">
-              <EditFormDataDisplay data={apiResponse} />
-            </div>
-      )}  
+ 
       
         <div>
         </div>

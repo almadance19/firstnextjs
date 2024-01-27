@@ -62,7 +62,7 @@ export const POST = async (request) => {
                         var pre_mwst = (total/1.19)*.19 ;
                         var mwst = (pre_mwst).toFixed(2);
                   
-                        const CheckoutData = {
+                        let CheckoutData = {
                             created_at: stripeResponse["created"],
                             ticket_id: id,
                             ticket_nr: id.slice(-10),
@@ -160,6 +160,10 @@ export const POST = async (request) => {
                                                             
                                 } else {
                                     console.log("Ticket already in the System");
+                                    
+                                    CheckoutData = ticketExists;
+
+                                    return new Response(JSON.stringify({ EventExists, CheckoutData }), { status: 201 });
                                 }
                             } catch (error) {
                                 console.log("Failed to create a new prompt", error);

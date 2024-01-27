@@ -19,12 +19,12 @@ const Nav = () => {
   }, []);
 
   return (
-    <nav className=' flex-between w-full mb-16 pt-3 text-primary-content'>
+    <nav className=' flex-between w-full mb-16 pt-3'>
     
       {/* <Link href='/my-events' className='black_btn'>
               Create Post
       </Link> */}
-      <Link href='/' className='flex gap-2 flex-center text-primary-content'>
+      <Link href='/' className='flex gap-2 flex-center '>
         <Image
           src='/assets/images/logo.svg'
           alt='logo'
