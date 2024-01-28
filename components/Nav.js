@@ -42,7 +42,7 @@ const Nav = () => {
             <Link href='/my-events' className='leading-normal text-lg pr-4'>
               My Events 
             </Link>
-            <Link href='/buy-product' className='leading-normal text-lg pr-4'>
+            <Link href='/' className='leading-normal text-lg pr-4'>
               Available Event Tickets
             </Link>
             <Link href='/my-tickets' className='leading-normal text-lg pr-4'>
@@ -70,10 +70,10 @@ const Nav = () => {
           </div>
         ) : (
           <>
-            <Link href='/buy-product' className='leading-normal text-lg pr-4'>
+            <Link href='/' className='leading-normal text-lg pr-4'>
               Available Event Tickets
             </Link>
-            <Link href='/buy-product' className='leading-normal text-lg pr-4'>
+            <Link href='/become-a-partner' className='leading-normal text-lg pr-4'>
               Become a Partner
             </Link>
             {providers &&
@@ -123,7 +123,7 @@ const Nav = () => {
                   My Events
                 </Link>
                 <Link
-                  href='/buy-product'
+                  href='/become-a-partner'
                   className='dropdown_link'
                   onClick={() => setToggleDropdown(false)}
                 >

@@ -8,7 +8,7 @@ const Home = () => (
       <span className='orange_gradient text-center'> Your Dancing Event Tickets</span>
     </h1>
     <p className='desc text-center'>
-      My Ticket is a platform for dancers to discover and save their dancing event tickets.
+      My Ticket is a platform for dancers & organisers to discover and save their dancing event tickets.
     </p>
 
     <Feed />
