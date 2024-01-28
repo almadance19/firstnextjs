@@ -30,28 +30,16 @@ export const POST = async (request) => {
     }
 }
 
-// export const GET = async (request, params ) => {
-//     try {
-//         await connectToDB();
-//         console.log("event_url", params);
-//         //const prompts = await Event.find({ eventURL: "response2"}).populate("creator")
 
-//         const event = await Event.find({ eventURL: params.event_url });
+export const GET = async (request) => {
+    try {
+        await connectToDB();
+        const prompts = await Event.find({});
+        console.log(prompts);
+        return new Response(JSON.stringify(prompts), { status: 200 });
+    } catch (error) {
+        return new Response("Failed to get prompts", { status: 500 });
+    }           
+}
 
-//         return new Response(JSON.stringify(event), { status: 200 })
-//     } catch (error) {
-//         return new Response("Failed to fetch prompts created by user", { status: 500 })
-//     }
-// } 
-
-// export const GET = async (request) => {
-//     try {
-//         await connectToDB();
-//         const prompts = await Prompt.find({}).populate("creator");
-
-//         return new Response(JSON.stringify(prompts), { status: 200 });
-//     } catch (error) {
-//         return new Response("Failed to get prompts", { status: 500 });
-//     }           
-// }
 

@@ -96,10 +96,20 @@ const handleGetCardData = async () => {
   };
   
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="bg-white p-8 rounded-md shadow-md">
+    <section className='w-full'>
+      <h1 className='head_text text-left'>
+        <span className='blue_gradient'>{id}</span>
+      </h1>
+      <span className='desc text-left'>****Download your participant list or edit individual ticket</span>
+      <p className='desc text-left'>{session?.user.email}</p>
+
+      <div className="">
+      {/* min-h-screen flex items-center justify-center */}
+      {/* <div className="bg-white p-8 rounded-md shadow-md"> */}
+      <div>
       <h1 className="text-2xl font-semibold mb-4">Event Sales Manager</h1>
       {(!csvbuttonCliked || !cardbuttonCliked) &&  (
+        <div>
         <div className="mb-4">
         <button
           id="send-to-api"
@@ -109,8 +119,9 @@ const handleGetCardData = async () => {
         >
           See all Sales
         </button>
-
-        <button
+        </div>
+        <div className="mb-4">
+                  <button
         id="send-to-api"
         name="send-to-api"
         onClick={handleGetCardData}
@@ -118,9 +129,10 @@ const handleGetCardData = async () => {
       >
         Search and Edit Individual Tickets
       </button>
-
-        </div>
+      </div>
+      </div>
       )}
+      
         {allCSVData ? (
             <CsvTable data={allCSVData} />
         ) : (
@@ -133,6 +145,10 @@ const handleGetCardData = async () => {
         )}
       </div>
     </div>
+    </section>
+
+
+
   );
 };
 
