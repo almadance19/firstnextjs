@@ -23,7 +23,7 @@ const RootLayout = ({ children }) => (
       <link rel='icon' href='/favicon.ico' />
       <link rel='apple-touch-icon' href='/apple-touch-icon.png' />
     </head>
-    <body className='	primary-content'>
+    <body className=''>
       <Provider>
         <Header />
         <main  className='.app2  pt-10 	primary-content '>

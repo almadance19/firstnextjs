@@ -3,13 +3,13 @@ import Link from "next/link";
 
 const Footer = () => {    
     return (
-        <footer data-theme="business" className="footer footer-center p-10 bg-primary text-white rounded">
+        <footer data-theme="business" className="footer footer-center p-10 text-white rounded">
             
   <nav className="grid grid-flow-col gap-4">
     <Link href='/' >About us</Link>
     <Link href='/' >Contact</Link>
-    <Link href='/' >Jobs</Link>
-    <Link href='/' >Press kit</Link>
+    <Link href='/' >FAQS</Link>
+    <Link href='/' >Impressum/Privacy</Link>
   </nav> 
   <nav>
     <div className="grid grid-flow-col gap-4">
