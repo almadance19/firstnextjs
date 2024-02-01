@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+
+
 const nextConfig = {
     experimental: {
       appDir: true,
@@ -15,5 +17,10 @@ const nextConfig = {
       return config
     }
   }
-  
+
+
+  // next.config.js
+
+
   module.exports = nextConfig
+

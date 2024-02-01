@@ -1,25 +1,59 @@
-// components/EventList.js
+"use client"
 
-
-
-
+import { CldImage } from 'next-cloudinary';
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import { usePathname, useRouter } from "next/navigation";
 
 const EventList = ({ events }) => {
   const { data: session } = useSession();
-//const router = useRouter();
+  console.log(events);
+  const router = useRouter();
 
-  const handleEdit = (eventId) => {
+  const handleEdit = (event) => {
     // Implement your edit logic, e.g., navigate to an edit page
-    console.log(`Edit event with ID: ${eventId}`);
+    console.log(`Edit event with ID: ${event._id}`);
+    sessionStorage.setItem('myEditData', JSON.stringify(event));
+      router.push("/my-events/edit-event");
   };
 
-  const handleDelete = (eventId) => {
+  const handleDelete = (_id) => {
     // Implement your delete logic
-    console.log(`Delete event with ID: ${eventId}`);
+    console.log(`Delete event with ID: ${_id}`);
+    const isConfirmed = window.confirm('Are you sure you want to delete?');
+
+    if (isConfirmed) {
+      // Perform the delete operation
+      console.log('Delete operation confirmed!');
+      // Add your delete logic here
+      try {
+        const body = {
+          _id: _id,
+          creator: session?.user.id,
+        };
+        const response = fetch("/api/event/delete", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(body),
+        });
+        console.log("response", response);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch URL. Status`);
+        } 
+        // Refresh the page
+        window.location.reload();
+        }
+        catch (error) {
+          console.error('Error fetching URL:', error);
+          window.location.reload();
+        }
+    } else {
+      console.log('Delete operation canceled.');
+    }
   };
 
 
@@ -27,7 +61,31 @@ const EventList = ({ events }) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {events.map((event) => (
-        // <Link href={`/my-events/ticketsales?eventurl=${event.eventURL}`} key={event._id}>
+        <div key={event._id}>
+        <section className='w-full flex justify-center items-start gap-5'>
+                  {event.eventFotoURL !== null && event.eventFotoURL !== undefined ? (
+                  <CldImage
+                      src={event.eventFotoURL}
+                      width="150"
+                      height="150"
+                      crop="fill"
+                      gravity="auto"
+                      radius="10"
+                      effect="sepia"
+                      className="img-fluid"
+                      alt="My Event Ticket"
+                    /> 
+                ): (
+                  <Image
+                        src='/assets/images/ticket2.svg'
+                        alt='logo'
+                        width={150}
+                        height={150}
+                        className='object-contain'
+                      />
+                ) } 
+        </section>
+
         <div key={event._id} className='flex justify-between items-start gap-5'>
         <div className="bg-white p-4 rounded-md shadow-md">
         <div className='flex-1 flex justify-start items-center gap-3 cursor-pointer'>
@@ -56,7 +114,7 @@ const EventList = ({ events }) => {
           <div className="mt-4 flex items-center justify-between">
               {/* Button to edit */}
               <button
-                onClick={() => handleEdit(event._id)}
+                onClick={() => handleEdit(event)}
                 className="text-sm text-gray-500 cursor-pointer"
               >
                 Edit
@@ -81,7 +139,7 @@ const EventList = ({ events }) => {
             </div>
         </div>
         </div>
-
+        </div>
       ))}
     </div>
   );

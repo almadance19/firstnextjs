@@ -10,14 +10,19 @@ export default function Example() {
   const router = useRouter();
   const { data: session } = useSession();
 
+  const editData = JSON.parse(sessionStorage.getItem('myEditData'));
+
+  console.log("editData");
+  console.log(editData);
+
   const [form, setForm] = useState({
-    event_name: '',
-    event_url: '',
+    event_name: editData.eventName,
+    event_url: editData.eventURL,
     event_key: '',
-    event_email: '',
-    eventWebsite: '',
-    event_description: '',
-    event_dates: '',
+    event_email: editData.eventEmail,
+    eventWebsite: editData.eventWebsite,
+    event_description: editData.eventDescription,
+    event_dates: editData.eventDate,
     event_end_date: '',
     event_start_time: '',
     event_end_time: '',
@@ -57,7 +62,7 @@ export default function Example() {
      
       console.log("Sending data to API...", body);
 
-      const response = await fetch("/api/event", {
+      const response = await fetch("/api/event/edit", {
         method: "POST",
         body: JSON.stringify(body),
         headers: new Headers({ "Content-Type": "application/json"}),
@@ -134,7 +139,7 @@ export default function Example() {
 
             <div className="sm:col-span-4">
               <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
-                Event Name
+                Event Name 
               </label>
               <div className="mt-2">
                 <input
@@ -358,8 +363,11 @@ export default function Example() {
           type="submit"
           className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
-          Save
+          Edit Event
         </button>
+        <p className="mt-1 text-sm leading-6 text-gray-600">
+            Please fill out all fields before.
+          </p>
       </div>
       </div>
     </form>

@@ -8,6 +8,7 @@ export const GET = async (request, { params }) => {
 
         const prompts = await Event.find({ creator: params.id }).select({
             creator: 0, // Exclude
+            eventKey: 0, // Exclude
             });
 
 

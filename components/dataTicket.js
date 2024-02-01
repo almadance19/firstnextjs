@@ -1,9 +1,11 @@
 
 import React from 'react';
+import { CldImage } from 'next-cloudinary';
 import QRCode from 'qrcode.react';
 import { useEffect } from "react";
 import PdfButton from "./PdfButton";
 import PrintButton from './PrintPage';
+import Image from 'next/image';
 
 
 export default function FormDataDisplay({data}) {
@@ -24,10 +26,35 @@ export default function FormDataDisplay({data}) {
     <>
   <div id="printableContent" className="container mx-auto p-4">
   <form className="bg-white border border-gray-300 p-4 rounded-md">
+  <div className='content-justify-center items-center '>
+  {data.EventExists.eventFotoURL !== undefined ? (
+    <CldImage
+        src={data.EventExists.eventFotoURL}
+        width="300"
+        height="300"
+        crop="fill"
+        gravity="auto"
+        radius="10"
+        effect="sepia"
+        className="img-fluid"
+        alt="My Event Ticket"
+      /> 
+  ): (
+    <Image
+          src='/assets/images/ticket2.svg'
+          alt='logo'
+          width={300}
+          height={300}
+          className='object-contain'
+        />
+  ) }
+  </div>
   <h1 className="text-3xl font-bold mb-4">{data.EventExists.eventName}</h1>
   <h2 className="text-2xl font-bold mb-4">{data.EventExists.eventDate}</h2>
   <p className=" font-bold mb-4">{data.EventExists.eventAdress}</p>
-  <p className=" font-bold mb-4">{data.EventExists.eventDescription}</p>
+  <p className=" font-bold mb-4">Details: {data.EventExists.eventDescription}</p>
+  <p className=" font-bold mb-4">Website:</p>
+  <p className=" font-bold mb-4">Telefon:</p>
   <br />
   <div className="mb-4">
   <label className="block text-gray-600 mb-2 font-bold">Payment Date</label>

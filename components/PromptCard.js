@@ -4,6 +4,9 @@ import { useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
+import { CldImage } from 'next-cloudinary';
+import Link from "next/link";
+
 
 const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
   const { data: session } = useSession();
@@ -26,20 +29,42 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
     setTimeout(() => setCopied(false), 3000);
   };
 
+  const handleWebsiteClick = () => {
+    if (router) {
+      //router.push("/event", { data: JSON.stringify(post) });
+      sessionStorage.setItem('myData', JSON.stringify(post));
+      router.push("/event");
+    }
+  }
+
+
   return (
     <div className='prompt_card'>
-      <div className='flex justify-between items-start gap-5'>
+      <div className='flex justify-between items-start gap-5' onClick={handleWebsiteClick}>
         <div
           className='flex-1 flex justify-start items-center gap-3 cursor-pointer'
-          onClick={handleProfileClick}
         >
-          <Image
-            src="/assets/images/logo.svg"
-            alt='user_image'
-            width={40}
-            height={40}
-            className='rounded-full object-contain'
-          />
+        {post.eventFotoURL !== undefined ? (
+                  <CldImage
+                      src={post.eventFotoURL}
+                      width="40"
+                      height="40"
+                      crop="fill"
+                      gravity="auto"
+                      radius="10"
+                      effect="sepia"
+                      className="img-fluid"
+                      alt="My Event Ticket"
+                    /> 
+                ): (
+                  <Image
+                        src='/assets/images/ticket2.svg'
+                        alt='logo'
+                        width={40}
+                        height={40}
+                        className='object-contain'
+                      />
+                ) }
 
           <div className='flex flex-col'>
             <h3 className='font-satoshi font-semibold text-gray-900'>
@@ -51,7 +76,14 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
           </div>
         </div>
 
-        <div className='copy_btn' onClick={handleCopy}>
+        <a href={`${post.eventWebsite}`} target="_blank" rel="noopener noreferrer">
+          <div className='copy_btn'>
+          <Image height="32" width="32" src="https://unpkg.com/@icon/icofont/icons/web.svg" />
+          </div>
+        </a>
+        {/* <div className='copy_btn' onClick={handleCopy}>
+        <Image height="32" width="32" src="https://unpkg.com/@icon/icofont/icons/web.svg" />
+
           <Image
             src={
               copied === post.prompt
@@ -62,10 +94,8 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
             width={12}
             height={12}
           />
-        </div>
+        </div> */}
       </div>
-      {/* SFSDF */}
-
       <p className='my-4 font-satoshi text-sm text-gray-700'>{post.eventName}</p>
       <p className='my-4 font-satoshi text-sm text-gray-700'>{post.eventDescription}</p>
       <p

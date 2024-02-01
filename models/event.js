@@ -41,6 +41,10 @@ const EventSchema = new Schema({
         type: String,
         required: [false, 'Foto is not required!'],
     },
+    eventWebsite: {
+        type: String,
+        required: [false, 'Foto is not required!'],
+    },
     });
 
 const Event = models.Event || model("Event", EventSchema);

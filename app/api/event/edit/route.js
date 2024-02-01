@@ -7,7 +7,6 @@ export const POST = async (request) => {
 
     console.log("request.json().userId");
 
-
     const { eventURL, eventKey, eventName, eventEmail, creator,createdAt,eventDescription,eventDate,eventAdress,eventFotoURL, eventWebsite   } = await request.json();
 
     console.log("event_image",eventFotoURL);
@@ -15,19 +14,19 @@ export const POST = async (request) => {
     try {
         await connectToDB();
         // check if user already exists
-        const EventExists = await Event.findOne({ eventURL: eventURL });
+        //const EventExists = await Event.findOne({ eventURL: eventURL });
+
+        const EventExists = await Event.findOneAndUpdate(
+            {eventURL: eventURL},
+            { $set: { eventURL: eventURL,eventKey: eventKey, eventName: eventName, eventEmail: eventEmail, creator: creator, createdAt: createdAt, eventDescription: eventDescription, eventDate: eventDate, eventAdress: eventAdress, eventFotoURL: eventFotoURL, eventWebsite: eventWebsite }}
+        )
 
         // if not, create a new document and save user in MongoDB
         if (!EventExists) {
-            const newEvent = new Event({eventURL, eventKey, eventName, eventEmail, creator,createdAt,eventDescription,eventDate,eventAdress,eventFotoURL, eventWebsite  });
-            await newEvent.save();
-            console.log("Event created successfully");
-            return new Response(JSON.stringify(newEvent), { status: 201 })
+            return new Response("Event not in the System", { status: 201 })
+        } 
+        return new Response("Successfully updated the Event", { status: 200 });
 
-        } else {
-            console.log("Event already in the System");
-            return new Response("Event already in the System", { status: 201 })
-        }
     } catch (error) {
         return new Response("Failed to create a new prompt", { status: 500 });
     }

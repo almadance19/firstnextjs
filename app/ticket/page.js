@@ -89,14 +89,33 @@ const ExternalApiPage = () => {
 
         setApiResponse(event_ticket_data);
         
-        /* SEND EMAIL
-        const URL = "https://script.google.com/macros/s/AKfycbxkEXaZ8Nx_aIicZB7xZEq_p7T-P3o4QkfOkBoov9i14GDVXlsUC1VieZKiydojNAP2/exec?";
-        console.log('Sending data to API...', event);
-        let google_string= `${URL}code=${id}`;
-        console.log('Sending data to API...',google_string);
+        //CREATE GET REQUEST TO GOOGLE SHEET API
+        // Add EMAIL, LINK, NAME, EVENTNAME and send it as Parameters
+
+        
+        const URL = "https://script.google.com/macros/s/AKfycbyFmNvafsmVqbRyvpESJRe4XLMd24TFOEdn7tDAagixS0WOM6ZLoQ8MKB_fh7Wku-Q/exec";
+        
+        const eventURL = event_ticket_data.CheckoutData.eventURL;
+        const eventName = event_ticket_data.CheckoutData.eventName;
+        const ticket_id = event_ticket_data.CheckoutData.ticket_id;
+        const ticket_nr = event_ticket_data.CheckoutData.ticket_nr;
+        const email = event_ticket_data.CheckoutData.email;
+        const name_payment = event_ticket_data.CheckoutData.name_payment;
+        const name_ticket = event_ticket_data.CheckoutData.name_ticket;
+        const ticket_type = event_ticket_data.CheckoutData.ticket_type;
+        const pre_total = event_ticket_data.CheckoutData.pre_total;
+        let google_string= `${URL}?eventURL=${eventURL}&eventName=${eventName}&ticket_id=${ticket_id}&ticket_nr=${ticket_nr}&email=${email}&name_payment=${name_payment}&name_ticket=${name_ticket}&ticket_type=${ticket_type}&pre_total=${pre_total}`;
+        
+        //let google_string= `${URL}?eventURL=${eventURL}&ticket_id=${ticket_id}&email=${email}`;
+
+
+        console.log('Sending email...',google_string);
         const response = await fetch(google_string);
         const data = await response.json();
-        */
+        console.log('Email sent.', data);
+        if (!data.ok) {
+          throw new Error(`Failed to send Email. Status: ${data}`);
+        }
           
 
       } else {

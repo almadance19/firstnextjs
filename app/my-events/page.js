@@ -60,7 +60,7 @@ const MyProfile = () => {
       <p className='text-left text-bold'>
         Create your events, sell your tickets online and manage them with us.
       </p>
-      <Link href='/organiser'>
+      <Link href='/become-a-partner'>
         <button className='btn btn-info py-3 my-2'>Create Event</button>
       </Link>
     </section>

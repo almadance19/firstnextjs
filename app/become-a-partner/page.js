@@ -1,9 +1,23 @@
+"use client"
 import Link from 'next/link';
+import { CldImage } from 'next-cloudinary';
+import UploadWidget from '@components/UploadWidget';
 
 const PartnersPage = () => {
   return (
     <section className='w-full'>
     <div className='primary-content '>
+    <CldImage
+        src="my_ticket/sgaknetm0bshth3edm5u.png"
+        width="600"
+        height="200"
+        crop="fill"
+        gravity="auto"
+        radius="10"
+        effect="sepia"
+        className="img-fluid"
+        alt="My Event Ticket"
+      />
     <h1 className='head_text text-left'>
         <span className='blue_gradient'>Welcome Potential Partner!</span>
     </h1>
@@ -50,3 +64,14 @@ const PartnersPage = () => {
 };
 
 export default PartnersPage;
+
+
+// // // import { CldImage } from 'next-cloudinary';
+// // // <CldImage
+// // //   width="600"
+// // //   height="600"
+// // //   src="<Public ID>"
+
+//https://res.cloudinary.com/daoqznkat/image/upload/v1695910364/cld-sample-5.jpg
+//efcb769db15b20fb156e708e8bf76ef0
+//https://res.cloudinary.com/daoqznkat/image/upload/v1695910364/cld-sample-5.jpg
