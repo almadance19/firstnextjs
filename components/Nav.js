@@ -122,13 +122,13 @@ const Nav = () => {
                 >
                   My Events
                 </Link>
-                <Link
+                {/* <Link
                   href='/become-a-partner'
                   className='dropdown_link'
                   onClick={() => setToggleDropdown(false)}
                 >
                   Buy Product
-                </Link>
+                </Link> */}
                 {/* <Link
                   href='/event-registration'
                   className='dropdown_link'
@@ -160,7 +160,19 @@ const Nav = () => {
           <>
             {providers &&
               Object.values(providers).map((provider) => (
-                <button
+                <div className='flex'>
+                <Image 
+                  src="assets/images/Hamburger.svg"
+                  width={37}
+                  height={37}
+                  className='rounded-full'
+                  alt='menu'
+                  onClick={() => setToggleDropdown(!toggleDropdown)}
+                />
+    
+                {toggleDropdown && (
+                  <div className='dropdown'>
+                  <button
                   type='button'
                   key={provider.name}
                   onClick={() => {
@@ -170,6 +182,44 @@ const Nav = () => {
                 >
                   Sign in
                 </button>
+                    <Link
+                      href='/my-tickets'
+                      className='dropdown_link'
+                      onClick={() => setToggleDropdown(false)}
+                    >
+                      My Tickets
+                    </Link>
+                    <Link
+                      href='/my-events'
+                      className='dropdown_link'
+                      onClick={() => setToggleDropdown(false)}
+                    >
+                      My Events
+                    </Link>
+                    {/* <Link
+                      href='/become-a-partner'
+                      className='dropdown_link'
+                      onClick={() => setToggleDropdown(false)}
+                    >
+                      Buy Product
+                    </Link> */}
+                    {/* <Link
+                      href='/event-registration'
+                      className='dropdown_link'
+                      onClick={() => setToggleDropdown(false)}
+                    >
+                      Event Registration
+                    </Link> */}
+                    <Link
+                      href='/contact'
+                      className='dropdown_link'
+                      onClick={() => setToggleDropdown(false)}
+                    >
+                      Contact
+                    </Link>
+                  </div>
+                )}
+              </div>
               ))}
           </>
         )}

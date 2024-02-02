@@ -89,34 +89,6 @@ const ExternalApiPage = () => {
 
         setApiResponse(event_ticket_data);
         
-        //CREATE GET REQUEST TO GOOGLE SHEET API
-        // Add EMAIL, LINK, NAME, EVENTNAME and send it as Parameters
-
-        
-        const URL = "https://script.google.com/macros/s/AKfycbyFmNvafsmVqbRyvpESJRe4XLMd24TFOEdn7tDAagixS0WOM6ZLoQ8MKB_fh7Wku-Q/exec";
-        
-        const eventURL = event_ticket_data.CheckoutData.eventURL;
-        const eventName = event_ticket_data.CheckoutData.eventName;
-        const ticket_id = event_ticket_data.CheckoutData.ticket_id;
-        const ticket_nr = event_ticket_data.CheckoutData.ticket_nr;
-        const email = event_ticket_data.CheckoutData.email;
-        const name_payment = event_ticket_data.CheckoutData.name_payment;
-        const name_ticket = event_ticket_data.CheckoutData.name_ticket;
-        const ticket_type = event_ticket_data.CheckoutData.ticket_type;
-        const pre_total = event_ticket_data.CheckoutData.pre_total;
-        let google_string= `${URL}?eventURL=${eventURL}&eventName=${eventName}&ticket_id=${ticket_id}&ticket_nr=${ticket_nr}&email=${email}&name_payment=${name_payment}&name_ticket=${name_ticket}&ticket_type=${ticket_type}&pre_total=${pre_total}`;
-        
-        //let google_string= `${URL}?eventURL=${eventURL}&ticket_id=${ticket_id}&email=${email}`;
-
-
-        console.log('Sending email...',google_string);
-        const response = await fetch(google_string);
-        const data = await response.json();
-        console.log('Email sent.', data);
-        if (!data.ok) {
-          throw new Error(`Failed to send Email. Status: ${data}`);
-        }
-          
 
       } else {
         console.error('ID or Event is undefined or null.');
@@ -144,10 +116,7 @@ const ExternalApiPage = () => {
     }
   }
 
-      
 
-
- 
 
   return (
     <div className="container mx-auto p-4 m-4 py-4">
@@ -196,14 +165,15 @@ const ExternalApiPage = () => {
           > 
             Open Ticket
           </button>  
-          <p className="mb-4">
+          {providers &&
+              Object.values(providers).map((provider) => (
+                <>
+                <p className="mb-4">
             Do you want to save your Ticket to be available here online?
           </p>
           <label className="block mb-2" htmlFor="email">
             ** Click the button to sign in and save your Ticket. Use the email you use in your stripe registration 
           </label>
-          {providers &&
-              Object.values(providers).map((provider) => (
                 <button
                   type='button'
                   key={provider.name}
@@ -214,8 +184,8 @@ const ExternalApiPage = () => {
                 >
                   Sign in & Show Ticket
                 </button>
+                </>
               ))}
-          
         </div>  
       )}
       {type === "buyer" && session?.user   && (

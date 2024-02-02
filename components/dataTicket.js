@@ -1,3 +1,4 @@
+"use client"
 
 import React from 'react';
 import { CldImage } from 'next-cloudinary';
@@ -6,6 +7,7 @@ import { useEffect } from "react";
 import PdfButton from "./PdfButton";
 import PrintButton from './PrintPage';
 import Image from 'next/image';
+
 
 
 export default function FormDataDisplay({data}) {
@@ -20,6 +22,50 @@ export default function FormDataDisplay({data}) {
     // Check if running in the browser environment
     if (typeof window !== 'undefined') {
     }}, []);
+
+    const  handleSendEmail = async () => {
+
+      try{
+        if (!data || !data.CheckoutData) {
+          console.error('Invalid data:', data);
+          return;
+        }
+      //CREATE GET REQUEST TO GOOGLE SHEET API
+      // Add EMAIL, LINK, NAME, EVENTNAME and send it as Parameters
+      //let google_string= `${URL}?eventURL=${eventURL}&ticket_id=${ticket_id}&email=${email}`;
+          const URL = "https://script.google.com/macros/s/AKfycbyFmNvafsmVqbRyvpESJRe4XLMd24TFOEdn7tDAagixS0WOM6ZLoQ8MKB_fh7Wku-Q/exec";        
+          const eventURL = data.CheckoutData.eventURL;
+          const eventName = data.CheckoutData.eventName;
+          const ticket_id = data.CheckoutData.ticket_id;
+          const ticket_nr = data.CheckoutData.ticket_nr;
+          const email = data.CheckoutData.email;
+          const name_payment = data.CheckoutData.name_payment;
+          const name_ticket = data.CheckoutData.name_ticket;
+          const ticket_type = data.CheckoutData.ticket_type;
+          const pre_total = data.CheckoutData.pre_total;
+          let google_string= `${URL}?eventURL=${eventURL}&eventName=${eventName}&ticket_id=${ticket_id}&ticket_nr=${ticket_nr}&email=${email}&name_payment=${name_payment}&name_ticket=${name_ticket}&ticket_type=${ticket_type}&pre_total=${pre_total}`;
+          
+            console.log('Sending email...',google_string);
+            const response = await fetch(google_string);
+            const responseData = await response.json();
+      console.log('Email sent.', responseData);
+      if (responseData.status="success"){
+        alert('Email sent sucessfully to: '+email)
+      }
+      if (!responseData.ok) {
+        throw new Error(`Failed to send Email. Status: ${responseData}`);
+      } else {
+        alert('Ticket sent to your Email: ' + email);
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+    }
+  };
+
+  const handleEmailClick = async () => {
+    await handleSendEmail();
+  };
+    
  
 
   return (
@@ -90,8 +136,14 @@ export default function FormDataDisplay({data}) {
     <QRCode value={`https://firstnextjs-wine.vercel.app/ticket?event=${data.CheckoutData.eventURL}&id=${data.CheckoutData.ticket_id}&type=org`} size={200} />
   </div>
   </form>
+  </div>  
+  <div className='p-4'>
+      <button className='btn btn-active btn-secondary' onClick={handleEmailClick}>Send Ticket to Email</button>
+      {/* Your other page content */}
   </div>
-    <PrintButton />
+  <div className='p-4'>
+  <PrintButton data={data} />
+  </div>
     </>
   );
 };
