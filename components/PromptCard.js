@@ -31,9 +31,9 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
 
   const handleWebsiteClick = () => {
     if (router) {
-      //router.push("/event", { data: JSON.stringify(post) });
-      sessionStorage.setItem('myData', JSON.stringify(post));
-      router.push("/event");
+      console.log("dataString",`/event?id=${post._id}` )
+
+      router.push(`/event?id=${post._id}`);
     }
   }
 

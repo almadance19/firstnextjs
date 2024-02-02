@@ -1,41 +1,109 @@
 "use client";   
 import Link from "next/link";
-import { useState } from 'react';
 import { useSession } from "next-auth/react";
 import UploadWidget from '@components/UploadWidget';
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Example() {
+
+  const [apiResponse, setApiResponse] = useState(null);
+  let [form, setForm] = useState(null);
+
+  console.log("EVENT")
+  const searchParams = useSearchParams();
+  const promptId = searchParams.get("id");
+  console.log("id",promptId)
+  let event_ticket_data
 
   const router = useRouter();
   const { data: session } = useSession();
 
-  const editData = JSON.parse(sessionStorage.getItem('myEditData'));
+  //trigger 
+useEffect(() => {
+  let isMounted = true;
 
-  console.log("editData");
-  console.log(editData);
+const body = {
+    _id: promptId,
+  };
+const fetchURL = async () => {
+    try {
+      console.log('Fetching URL...', promptId);
+      const response2 = await fetch("/api/event/findone", 
+      {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: new Headers({ "Content-Type": "application/json" }),
+      });
 
-  const [form, setForm] = useState({
-    event_name: editData.eventName,
-    event_url: editData.eventURL,
-    event_key: '',
-    event_email: editData.eventEmail,
-    eventWebsite: editData.eventWebsite,
-    event_description: editData.eventDescription,
-    event_dates: editData.eventDate,
-    event_end_date: '',
-    event_start_time: '',
-    event_end_time: '',
-    event_address: '',
-    event_street: '',
-    event_city: '',
-    event_state: '',
-    event_zip: '',
-    event_country: '',
-    event_image: '',
-    event_cover_image: ''
-  });
 
+      if (!response2.ok) {
+        throw new Error(`Failed to fetch URL. Status: ${response2.status}`);
+      }
+       
+      const data = await response2.json();
+
+      if (isMounted) {
+        console.log(data);
+        event_ticket_data=data;
+
+        setForm ({
+          event_name: event_ticket_data?.eventName || '' ,
+          event_url: event_ticket_data?.eventURL || '',
+          event_key: event_ticket_data?.event_key,
+          event_email: event_ticket_data?.eventEmail || '',
+          eventWebsite: event_ticket_data?.eventWebsite || '',
+          event_description: event_ticket_data?.eventDescription || '',
+          event_dates: event_ticket_data?.eventDate || '',
+          event_end_date: '',
+          event_start_time: '',
+          event_end_time: '',
+          event_address: '',
+          event_street: '',
+          event_city: '',
+          event_state: '',
+          event_zip: '',
+          event_country: '',
+          event_image: '',
+          event_cover_image: ''
+        });
+        setApiResponse(data);
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  fetchURL();
+  
+
+  return () => {
+    isMounted = false;
+    
+  };
+}, [promptId]);
+
+
+  // const [form2, setForm2] = useState({
+  //   event_name: event_ticket_data?.eventName || '',
+  //   event_url: event_ticket_data?.eventURL || '',
+  //   event_key: '',
+  //   event_email: event_ticket_data?.eventEmail || '',
+  //   eventWebsite: event_ticket_data?.eventWebsite || '',
+  //   event_description: event_ticket_data?.eventDescription || '',
+  //   event_dates: event_ticket_data?.eventDate || '',
+  //   event_end_date: '',
+  //   event_start_time: '',
+  //   event_end_time: '',
+  //   event_address: '',
+  //   event_street: '',
+  //   event_city: '',
+  //   event_state: '',
+  //   event_zip: '',
+  //   event_country: '',
+  //   event_image: '',
+  //   event_cover_image: ''
+  // });
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -104,6 +172,8 @@ export default function Example() {
 
 
   return (
+    <>
+    {apiResponse ? (
     <div className="bg-white shadow sm:rounded-lg py-4 m-2">
     <form 
     id="form_message"
@@ -209,8 +279,8 @@ export default function Example() {
             <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
                 Cover Image
             </label>
-            <UploadWidget  onParameterChange={handleChildParameter} />
-            {childParameter && (
+            {/* <UploadWidget  onParameterChange={handleChildParameter} /> */}
+            {/* {childParameter && (
               <div className="mt-2">
                 <p>Foto uploaded successfully:</p>
                 <input
@@ -222,7 +292,7 @@ export default function Example() {
                   readOnly
                 />
               </div>
-          )}
+          )} */}
             </div>
           </div>
         </div>
@@ -371,6 +441,10 @@ export default function Example() {
       </div>
       </div>
     </form>
-  </div>
+  </div>) : (
+      <p>Loading...</p>
+    )}
+  </>
+
   )
 }

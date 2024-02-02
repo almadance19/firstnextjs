@@ -15,8 +15,7 @@ const EventList = ({ events }) => {
   const handleEdit = (event) => {
     // Implement your edit logic, e.g., navigate to an edit page
     console.log(`Edit event with ID: ${event._id}`);
-    sessionStorage.setItem('myEditData', JSON.stringify(event));
-      router.push("/my-events/edit-event");
+      router.push(`/my-events/edit-event/?id=${event._id}`);
   };
 
   const handleDelete = (_id) => {
