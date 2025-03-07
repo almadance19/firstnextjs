@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: false,
   daisyui: {
     themes: ["light", "dark", "cupcake","business"],
   },
